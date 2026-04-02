@@ -602,6 +602,9 @@
  
     <!-- CONTACT FORM -->
     <form id="contactForm" action="https://formspree.io/f/xeepagdd" method="POST" class="reveal" style="max-width:560px;margin:3rem auto 0;text-align:left;">
+      <input type="hidden" name="_replyto" value="">
+      <input type="hidden" name="_subject" value="New message from Ndabistar Portfolio">
+      <input type="text" name="_gotcha" style="display:none">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
         <div>
           <label style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.5rem;">Name</label>
@@ -745,24 +748,37 @@
       });
     });
  
-        // CONTACT FORM
-        const form = document.getElementById('contactForm');
-        if(form) {
-          form.addEventListener('submit', async e => {
-            e.preventDefault();
-            const btn = form.querySelector('button[type="submit"]');
-            btn.textContent = 'Sending...';
-            btn.disabled = true;
-            try {
-              const res = await fetch(form.action, { method:'POST', body: new FormData(form), headers:{ Accept:'application/json' } });
-              if(res.ok) {
-                form.reset();
-                btn.textContent = 'Sent ✦';
-                document.getElementById('formMsg').style.display = 'block';
-              } else { btn.textContent = 'Error — try email instead'; btn.disabled = false; }
-            } catch { btn.textContent = 'Error — try email instead'; btn.disabled = false; }
+    // CONTACT FORM
+    const form = document.getElementById('contactForm');
+    if(form) {
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        try {
+          const res = await fetch('https://formspree.io/f/xeepagdd', {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
           });
-        }
-      </script>
-    </body>
-    </html>
+          const json = await res.json();
+          if(res.ok) {
+            form.reset();
+            btn.textContent = 'Sent ✦';
+            document.getElementById('formMsg').style.display = 'block';
+          } else {
+            btn.textContent = 'Send Message ✦';
+            btn.disabled = false;
+            console.error(json);
+          }
+                } catch(err) {
+                  btn.textContent = 'Send Message ✦';
+                  btn.disabled = false;
+                  console.error(err);
+                }
+              });
+            }
+          </script>
+        </body>
+        </html>
