@@ -601,7 +601,7 @@
     <p class="reveal" style="color:var(--muted);font-size:.85rem;max-width:480px;margin:0 auto;line-height:1.9;">Brand, website, animation, or just a vibe — reach out and let's build something unforgettable.</p>
  
     <!-- CONTACT FORM -->
-    <form id="contactForm" action="YOUR_FORMSPREE_URL" method="POST" class="reveal" style="max-width:560px;margin:3rem auto 0;text-align:left;">
+    <form id="contactForm" action="https://formspree.io/f/xeepagdd" method="POST" class="reveal" style="max-width:560px;margin:3rem auto 0;text-align:left;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
         <div>
           <label style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.5rem;">Name</label>
@@ -760,10 +760,7 @@
                 btn.textContent = 'Sent ✦';
                 document.getElementById('formMsg').style.display = 'block';
               } else { btn.textContent = 'Error — try email instead'; btn.disabled = false; }
-            } catch (err) {
-              btn.textContent = 'Error — try email instead';
-              btn.disabled = false;
-            }
+            } catch { btn.textContent = 'Error — try email instead'; btn.disabled = false; }
           });
         }
       </script>
